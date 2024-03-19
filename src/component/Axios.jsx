@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import $ from 'jquery';
 
 axios.defaults.withCredentials = true;
 
@@ -34,6 +35,13 @@ const Axios = () => {
 
     }
 
+    const TransferFileBtnClickHandler = () => {
+        console.log("[Axios] TransferFileBtnClickHandler()");
+
+        transferFile();
+
+    }
+
     async function getData() {
         try {
             const response = await axios.get('http://localhost:8090/axios/get_data', 
@@ -57,7 +65,7 @@ const Axios = () => {
             console.log("[Axios] GET CUMMUNICATION ERROR!!");
 
         }
-    };
+    }
 
     async function postData() {
         try {
@@ -80,7 +88,7 @@ const Axios = () => {
             console.log("[Axios] POST CUMMUNICATION ERROR!!");
 
         }
-    };
+    }
 
     async function putData() {
         try {
@@ -103,7 +111,7 @@ const Axios = () => {
             console.log("[Axios] PUT CUMMUNICATION ERROR!!");
 
         }
-    };
+    }
 
     async function deleteData() {
         try {
@@ -129,7 +137,59 @@ const Axios = () => {
             console.log("[Axios] DELETE CUMMUNICATION ERROR!!");
 
         }
-    };
+    }
+
+    async function transferFile() {
+
+        let attach_files = $('input[name="attach_file"]');
+        let files = attach_files[0].files;
+
+        let formData = new FormData();
+        formData.append("id", "gildong");
+        formData.append("attach_file", files[0]);
+
+        axios({
+            method: 'post',
+            url: 'http://localhost:8090/axios/transfer_file',
+            data: formData,
+        })
+        .then(response => {
+            console.log("[Axios] TRANSFER FILE CUMMUNICATION SUCCESS!!");
+            console.log("response: ", response);
+            console.log("data1: ", response.data.data1);
+            console.log("data2: ", response.data.data2);
+            console.log("data3: ", response.data.data3);
+
+        })
+        .catch(e => {
+            console.log("[Axios] TRANSFER FILE CUMMUNICATION FAIL!!");
+            
+        });
+
+        // try {
+        //     const response = await axios.post();
+                
+        //         'http://localhost:8090/axios/transfer_file',
+        //     // POST: body에 실어 보냄
+        //     {
+        //         'id': 'gildong',
+        //         data: formData,
+        //         withCredentials: true,
+        //     },
+        // );
+
+        // console.log("[Axios] POST CUMMUNICATION SUCCESS!!");
+        // console.log("response: ", response);
+        // console.log("data1: ", response.data.data1);
+        // console.log("data2: ", response.data.data2);
+        // console.log("data3: ", response.data.data3);
+            
+
+        // } catch (e) {
+        //     console.log("[Axios] POST CUMMUNICATION ERROR!!");
+
+        // }
+    }
 
     /*
     조회: GET
@@ -139,10 +199,12 @@ const Axios = () => {
     */
     return(
         <>
-            <input type="button" value="GET BUTTON" onClick={getBtnClickHandler}/> <br />       
-            <input type="button" value="POST BUTTON" onClick={postBtnClickHandler}/> <br />
-            <input type="button" value="PUT BUTTON" onClick={putBtnClickHandler}/> <br />
-            <input type="button" value="DELETE BUTTON" onClick={deleteBtnClickHandler}/> <br />
+            <input type="button" value="GET BUTTON" onClick={getBtnClickHandler} /> <br />       
+            <input type="button" value="POST BUTTON" onClick={postBtnClickHandler} /> <br />
+            <input type="button" value="PUT BUTTON" onClick={putBtnClickHandler} /> <br />
+            <input type="button" value="DELETE BUTTON" onClick={deleteBtnClickHandler} /> <br /><br />
+            <input type="file" name="attach_file" /> <br />
+            <input type="button" value="TRANSFER FILE BUTTON" onClick={TransferFileBtnClickHandler} /><br />
         </>
     );
 }
