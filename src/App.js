@@ -1,9 +1,10 @@
 import './App.css';
+import Axios from './component/Axios';
 
 function App() {
   return (
     <>
-      APP Component
+      <Axios />
     </>
   );
 }
