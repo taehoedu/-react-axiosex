@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import $ from 'jquery';
 
+axios.defaults.withCredentials = true;
+
 const Axios = () => {
 
     // handler
@@ -76,7 +78,7 @@ const Axios = () => {
                 params: {
                     'id': 'gildong',
                 },
-                withCredentials: true,
+                // withCredentials: true,
             }
         );
 
@@ -99,7 +101,7 @@ const Axios = () => {
             // POST: body에 실어 보냄
             {
                 'id': 'gildong',
-                withCredentials: true,
+                // withCredentials: true,
             },
         );
 
@@ -122,7 +124,7 @@ const Axios = () => {
             // PUT: body에 실어 보냄
             {
                 'id': 'gildong',
-                withCredentials: true,
+                // withCredentials: true,
             },
         );
 
@@ -147,7 +149,7 @@ const Axios = () => {
                 data: {
                     'id': 'gildong',
                 },
-                withCredentials: true,
+                // withCredentials: true,
             }
             
         );
