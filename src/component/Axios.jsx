@@ -35,10 +35,38 @@ const Axios = () => {
 
     }
 
-    const TransferFileBtnClickHandler = () => {
-        console.log("[Axios] TransferFileBtnClickHandler()");
+    const transferFileBtnClickHandler = () => {
+        console.log("[Axios] transferFileBtnClickHandler()");
 
         transferFile();
+
+    }
+
+    const postFormDataBtnClickHandler = () => {
+        console.log("[Axios] postFormDataBtnClickHandler()");
+
+        postFormData();
+
+    }
+
+    const putFormDataBtnClickHandler = () => {
+        console.log("[Axios] putFormDataBtnClickHandler()");
+
+        putFormData();
+
+    }
+
+    const deleteFormDataBtnClickHandler = () => {
+        console.log("[Axios] deleteFormDataBtnClickHandler()");
+
+        deleteFormData();
+
+    }
+
+    const deleteFormDataDtoBtnClickHandler = () => {
+        console.log("[Axios] deleteFormDataDtoBtnClickHandler()");
+
+        deleteFormDataDto();
 
     }
 
@@ -166,29 +194,111 @@ const Axios = () => {
             
         });
 
-        // try {
-        //     const response = await axios.post();
-                
-        //         'http://localhost:8090/axios/transfer_file',
-        //     // POST: body에 실어 보냄
-        //     {
-        //         'id': 'gildong',
-        //         data: formData,
-        //         withCredentials: true,
-        //     },
-        // );
+    }
 
-        // console.log("[Axios] POST CUMMUNICATION SUCCESS!!");
-        // console.log("response: ", response);
-        // console.log("data1: ", response.data.data1);
-        // console.log("data2: ", response.data.data2);
-        // console.log("data3: ", response.data.data3);
+    async function postFormData() {
+
+        let formData = new FormData();
+        formData.append("id", "gildong");
+        formData.append("pw", "1234");
+
+        axios({
+            method: 'post',
+            url: 'http://localhost:8090/axios/post_formdata',
+            data: formData,
+        })
+        .then(response => {
+            console.log("[Axios] POST FORMDATA CUMMUNICATION SUCCESS!!");
+            console.log("response: ", response);
+            console.log("data1: ", response.data.data1);
+            console.log("data2: ", response.data.data2);
+            console.log("data3: ", response.data.data3);
+
+        })
+        .catch(e => {
+            console.log("[Axios] POST FORMDATA CUMMUNICATION FAIL!!");
             
+        });
 
-        // } catch (e) {
-        //     console.log("[Axios] POST CUMMUNICATION ERROR!!");
+    }
 
-        // }
+    async function putFormData() {
+
+        let formData = new FormData();
+        formData.append("id", "gildong");
+        formData.append("pw", "1234");
+
+        axios({
+            method: 'put',
+            url: 'http://localhost:8090/axios/put_formdata',
+            data: formData,
+        })
+        .then(response => {
+            console.log("[Axios] PUT FORMDATA CUMMUNICATION SUCCESS!!");
+            console.log("response: ", response);
+            console.log("data1: ", response.data.data1);
+            console.log("data2: ", response.data.data2);
+            console.log("data3: ", response.data.data3);
+
+        })
+        .catch(e => {
+            console.log("[Axios] PUT FORMDATA CUMMUNICATION FAIL!!");
+            
+        });
+
+    }
+
+    async function deleteFormData() {
+
+        let formData = new FormData();
+        formData.append("id", "gildong");
+        formData.append("pw", "1234");
+
+        axios({
+            method: 'delete',
+            url: 'http://localhost:8090/axios/delete_formdata',
+            data: formData,
+        })
+        .then(response => {
+            console.log("[Axios] DELETE FORMDATA CUMMUNICATION SUCCESS!!");
+            console.log("response: ", response);
+            console.log("data1: ", response.data.data1);
+            console.log("data2: ", response.data.data2);
+            console.log("data3: ", response.data.data3);
+
+        })
+        .catch(e => {
+            console.log("[Axios] DELETE FORMDATA CUMMUNICATION FAIL!!");
+            
+        });
+
+    }
+
+    async function deleteFormDataDto() {
+
+        let formData = new FormData();
+        formData.append("id", "gildong");
+        formData.append("pw", "1234");
+        formData.append("email", "gildong@gmail.com");
+
+        axios({
+            method: 'delete',
+            url: 'http://localhost:8090/axios/delete_formdata_dto',
+            data: formData,
+        })
+        .then(response => {
+            console.log("[Axios] DELETE FORMDATA DTO CUMMUNICATION SUCCESS!!");
+            console.log("response: ", response);
+            console.log("data1: ", response.data.data1);
+            console.log("data2: ", response.data.data2);
+            console.log("data3: ", response.data.data3);
+
+        })
+        .catch(e => {
+            console.log("[Axios] DELETE FORMDATA DTO CUMMUNICATION FAIL!!");
+            
+        });
+
     }
 
     /*
@@ -204,7 +314,11 @@ const Axios = () => {
             <input type="button" value="PUT BUTTON" onClick={putBtnClickHandler} /> <br />
             <input type="button" value="DELETE BUTTON" onClick={deleteBtnClickHandler} /> <br /><br />
             <input type="file" name="attach_file" /> <br />
-            <input type="button" value="TRANSFER FILE BUTTON" onClick={TransferFileBtnClickHandler} /><br />
+            <input type="button" value="TRANSFER FILE BUTTON" onClick={transferFileBtnClickHandler} /><br /> <br />
+            <input type="button" value="POST BUTTON BY FORMDATA" onClick={postFormDataBtnClickHandler} /> <br />
+            <input type="button" value="PUT BUTTON BY FORMDATA" onClick={putFormDataBtnClickHandler} /> <br />
+            <input type="button" value="DELETE BUTTON BY FORMDATA" onClick={deleteFormDataBtnClickHandler} /> <br />
+            <input type="button" value="DELETE BUTTON BY FORMDATA DTO" onClick={deleteFormDataDtoBtnClickHandler} /> <br />
         </>
     );
 }
